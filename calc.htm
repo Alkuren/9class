@@ -1,0 +1,234 @@
+﻿<html>
+<head> 
+<meta charset="utf-8">
+<title>Калькулятор</title>
+</head>
+<body>
+<center><h2>Калькулятор</h2></center>
+<form name="f1">
+<table cellspacing="20">
+<tr>
+<td>
+<input type="text" name="tablo" size="13">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+	<table>
+	<tr>
+	<td><input type="button" value=" 1 " onclick="digit(1)"</td>
+	<td><input type="button" value=" 2 " onclick="digit(2)"</td>
+	<td><input type="button" value=" 3 " onclick="digit(3)"</td>
+	</tr>
+	<tr>
+	<td><input type="button" value=" 4 " onclick="digit(4)"</td>
+	<td><input type="button" value=" 5 " onclick="digit(5)"</td>
+	<td><input type="button" value=" 6 " onclick="digit(6)"</td>
+	</tr>
+	<tr>
+	<td><input type="button" value=" 7 " onclick="digit(7)"</td>
+	<td><input type="button" value=" 8 " onclick="digit(8)"</td>
+	<td><input type="button" value=" 9 " onclick="digit(9)"</td>
+	</tr>
+	<tr>
+	<td><input type="button" value=" 0 " onclick="digit(0)"</td>
+	<td><input type="button" value=" , " onclick="digit('10')" name="dpoint"</td>
+	<td><input type="button" value="+/-" onclick="negative()"</td>
+	</tr>
+	</table>
+</td>
+<td>
+	<table>
+		<tr>
+	<td><input type="reset" value=" C "  </td>
+	<td><input type="button" value="<-" onclick="backsp()"</td>
+	<td><input type="button" value="  " onclick="oper(3)"</td>
+	</tr>
+
+	<tr>
+	<td><input type="button" value=" + " onclick="oper(1)" name="plus"</td>
+	<td><input type="button" value=" - " onclick="oper(2)" name="minus"</td>
+	<td><input type="button" value=" √⁻ " onclick="koren()"</td>
+	
+	</tr>
+	<tr>
+	<td><input type="button" value=" * " onclick="oper(3)" name="umn"</td>
+	<td><input type="button" value=" / " onclick="oper(4)" name="del"</td>
+	<td><input type="button" value=" ! " onclick="fact()"</td>
+	</tr>
+	<tr>
+	<td><input type="button" value="  " onclick="oper(1)"</td>
+	<td colspan="2"><input type="button" value="     =      " onclick="ravno()"</td>
+	</tr>
+	</table>
+</td>
+</tr>
+</table>
+</form>
+
+</body>
+<script language="JavaScript">
+//ver 2.02, Copyright Alexey Kurenshchikov, 2012
+var one=null,two, op,afteroper=0
+function digit(d) {
+if (afteroper){
+ document.f1.tablo.value=""
+ afteroper=0
+}
+if(d==10) {
+var point=1/10
+d=point.toString().charAt(1)
+document.f1.dpoint.value=" "+d+" "
+
+for(i=0; i<document.f1.tablo.value.length; i++) {
+if(document.f1.tablo.value.charAt(i) == d){
+d=""
+break
+}
+
+}
+if (document.f1.tablo.value.length==0) {
+d="0"+d
+}
+
+}
+document.f1.tablo.value=document.f1.tablo.value+d
+}
+function negative() {
+document.f1.tablo.value=(-1)*Number(document.f1.tablo.value)
+}
+function oper(o) {
+//alert(one)
+if (!afteroper){
+  if(one!=null) {
+   ravno()
+  }
+  one=Number(document.f1.tablo.value)
+ 
+}
+
+
+afteroper=1
+//document.f1.tablo.value=""
+op=o
+switch (op) {
+  case 1:
+    clearoper()
+    document.f1.plus.style.color="red"
+    break
+  case 2:
+    clearoper()
+    document.f1.minus.style.color="red"
+    break
+  case 3:
+    clearoper()
+    document.f1.umn.style.color="red"
+    break
+  case 4:
+   clearoper()
+    document.f1.del.style.color="red"
+    break
+  default:
+    alert('Пардон, не понял что делать!')
+}
+
+
+
+
+}
+function ravno() {
+two=Number(document.f1.tablo.value)
+switch (op) {
+  case 1:
+    document.f1.tablo.value=correctres(one+two)
+	clearoper()
+	one=null
+    break
+  case 2:
+    document.f1.tablo.value=correctres(one-two)
+	clearoper()
+	one=null
+    break
+  case 3:
+    document.f1.tablo.value=correctres(one*two)
+	clearoper()
+	one=null
+    break
+  case 4:
+	if(two!=0){
+    document.f1.tablo.value=correctres(one/two)
+	clearoper()
+	one=null
+    } else {
+	 alert("Деление на 0!")
+	 document.f1.tablo.value=one
+	}
+    break
+  default:
+    alert('Пардон, не понял что делать в равно!')
+}
+
+}
+function backsp() {
+ if(document.f1.tablo.value.length!=0) {
+   document.f1.tablo.value=document.f1.tablo.value.substr(0,document.f1.tablo.value.length-1)
+ }
+}
+
+function clearoper() {
+document.f1.plus.style.color="black"
+document.f1.minus.style.color="black"
+document.f1.umn.style.color="black"
+document.f1.del.style.color="black"
+
+}
+function correctres(n) {
+var nstr,num,zel,drob,std_n,std_nstr,poryad,std_drob,nstr10
+nstr=n.toString()
+num=nstr.indexOf(".")
+if (num!=-1) {
+//10 symbols before the last one
+ nstr10=nstr.substr(nstr.length-11,10)
+// alert(nstr10)
+ if(nstr10=="9999999999" || nstr10=="0000000000") {
+ poryad=nstr.length-num-2
+ std_n=n*Math.pow(10,poryad)
+ std_n=Math.round(std_n)/Math.pow(10,poryad)
+ n=std_n
+ //alert(std_n)
+ }
+
+//zel=nstr.substr(0,num)
+//drob=nstr.substr(num+1)
+
+
+
+
+
+
+
+//std_nstr=n*10
+//std_n=n*Math.pow(10,poryad)
+//std_n=Math.round(std_n)
+//std_nstr=std_n.toString()
+//std_drob=std_drob.substr(num+1)
+//alert(std_drob)
+
+//nstr=n.toString().substr(0,10)
+}
+return(n)
+}
+function koren(){
+ var n
+ n=Number(document.f1.tablo.value)
+ if(n<0) {
+  alert("Ошибка!")
+ } else {
+ document.f1.tablo.value=correctres(Math.sqrt(n))
+ }
+}
+
+</script>
+</html>

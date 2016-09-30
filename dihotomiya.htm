@@ -1,0 +1,86 @@
+﻿<html>
+<head> 
+<meta charset="utf-8">
+<title>Дихотомия</title>
+</head>
+<body>
+<center><h2>Дихотомия</h2></center>
+<form name="f1">
+<h3>Решение уравнения <em>x<sup>2</sup>-2=0 </em> на отрезке [x0;x1]  с точностью до eps</h3>
+ x0= <input type="text" size="5" name="tx0" value="1" onfocus=init()>&nbsp;
+ x1= <input type="text" size="5" name="tx1" value="2" onfocus=init()><br>
+ eps= <input type="text" size="5" name="teps" value="0.01" onfocus=init()><br>
+ 
+ <input type="button" value="Жми!"  onclick="solve()">
+</form>
+
+</body>
+<script language="JavaScript">
+function f(x){ // our equation is f(x)=0
+ var fx=x*x-2
+ return(fx)
+}
+function isNumber(o) {
+  return ! isNaN(o*1) && o != null;
+}
+function solve() {
+ var x0,x1,xm,eps,f_xm,x0b,x1b,xmb,msg="",signer=1
+ x0b=x0=Number(document.f1.tx0.value)
+ x1b=x1=Number(document.f1.tx1.value)
+ //Проверка корректности данных
+ if (f(x0b)*f(x1b)>0) {
+  document.f1.tx0.style.backgroundColor="red"
+  document.f1.tx1.style.backgroundColor="red"
+  alert("Одинаковый знак функции на концах отрезка, исправьте!")
+  return(0)
+ }
+ if( f(x0b)>0 ){ //Меняем знак, чтобы на левом конце было меньше 0
+ signer=-1
+ }
+ xmb=xm=(x0+x1)/2
+ eps=document.f1.teps.value
+ if(isNumber(eps) && eps>0) { // eps is a positive number with right decimal point sign
+ eps=Number(eps)
+ }
+ else { // not valid decimal point sign or not number
+  document.f1.teps.style.backgroundColor="red"
+  alert("Correct eps (may be '.' <-> ',' ), please!")
+  return
+ }
+ //alert(eps)
+ while (Math.abs(x1-x0)>eps) { 
+  xm=(x0+x1)/2
+  f_xm=signer*f(xm)
+  //f_xm=xm-1.5
+  //alert(f_xm)
+  if(f_xm>0){
+   x1=xm
+  }
+  else if (f_xm<0){
+   x0=xm
+  }
+  else {
+   alert("Точное решение: " + xm)
+   return(xm)
+  }
+ }
+   if (xmb == xm) {// no entry to while
+    msg="Eps= "+eps+" is too large:-|\n"
+   }  else if (Math.abs(x1b-xm)<eps || Math.abs(x0b-xm)<eps) {
+   msg="Похоже, что на выбранном интервале нет корней или их более одного!\n"
+   }
+   alert(msg+"Приближенное решение: " + xm)
+   
+   return(xm)
+}
+function init(){
+ document.f1.teps.style.backgroundColor="white"
+ document.f1.tx0.style.backgroundColor="white"
+ document.f1.tx1.style.backgroundColor="white"
+ 
+}
+
+
+
+</script>
+</html>

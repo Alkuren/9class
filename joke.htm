@@ -1,0 +1,61 @@
+﻿<html>
+<head> 
+<meta charset="utf-8">
+<title>Вычисление НОД</title>
+<script language="JavaScript">
+function init() {
+document.f1.n1.style.fontSize="100%"
+}
+
+function joke(n) {
+ document.body.innerHTML = ''
+ document.write('<body onload=init()>')
+ document.write('<center><h2>Дави!</h2></center>')
+ document.write('<form name="f1">')
+
+if (n==1) {
+
+ document.write('<table border="0"><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td id=cell ><input type="button" value="Жми!" onmouseover="joke(2)" name="n1"></td></tr></table></form>')
+ 
+
+}
+if (n==2) {
+
+ document.write('<table border="0"><tr><td><input type="button" value="Жми!" onmouseover="joke(1)" name="n1"></td><td id=cell ></td></tr></table></form>')
+
+ }
+ document.f1.n1.style.fontSize="150%"
+ document.f1.n1.style.color="red"
+ setTimeout('document.f1.n1.style.color="yellow"', 500)
+ setTimeout('document.f1.n1.style.color="green"', 1000)
+ setTimeout('document.f1.n1.style.color="black"',1500) 
+ setTimeout('document.f1.n1.style.fontSize="100%"',1500)
+}
+
+</script>
+
+</head>
+<body onload=init()>
+<center><h2>Дави!</h2></center>
+<form name="f1">
+<table border="0">
+<tr>
+<td>
+<input type="button" value="Жми!" onmouseover="joke(1)"name="n1">
+</td>
+<td id=cell >
+
+</td>
+</tr>
+</table> 
+
+ 
+
+</form>
+
+</body>
+
+
+
+
+</html>

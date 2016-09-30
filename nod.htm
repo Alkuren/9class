@@ -1,0 +1,33 @@
+﻿<html>
+<head> 
+<meta charset="utf-8">
+<title>Вычисление НОД</title>
+</head>
+<body>
+<center><h2>Вычисление НОД</h2></center>
+<form name="f1">
+ <input type="text" size="5" name="t1" value="39"> 
+ <input type="text" size="5" name="t2" value="26"><br>
+ <input type="button" value="НОД" onclick="nod()">
+</form>
+
+</body>
+<script language="JavaScript">
+function nod() {
+  var one=Number(document.f1.t1.value);
+  var two=Number(document.f1.t2.value);
+  var res = "НОД "+one+" и "+ two +" = ";
+  while (one != two) {
+   if (one>two) {
+    one=one-two;
+   } else {
+   two=two-one;
+   }; 
+  };	
+  alert (res+one);
+  return one;
+
+}
+
+</script>
+</html>

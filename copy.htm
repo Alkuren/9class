@@ -1,0 +1,19 @@
+﻿<html>
+<head> 
+<meta charset="utf-8">
+<title>Поработаем с Java-Script</title>
+</head>
+<body>
+<form name="f1">
+ <input type="text" size="20" name="t1" value="Чувак"> <input type="text" size="20" name="t2"><br>
+ <input type="button" value="Жми!" onclick="copytext()">
+</form>
+
+</body>
+<script language="JavaScript">
+function copytext() {
+  document.f1.t2.value= "Привет, " + document.f1.t1.value+"!";
+}
+
+</script>
+</html>

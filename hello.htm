@@ -1,0 +1,19 @@
+<html>
+<head> 
+<title>Поработаем с Java-Script</title>
+</head>
+<body>
+<form name="f1">
+ <input type="text" size="20" name="t1" value="Чувак"><br>
+ <input type="button" value="Жми!" onclick="Hello()">
+ <input type="button" value="Дави!" onclick='alert("Привет, " + document.f1.t1.value+"!")'>
+</form>
+
+</body>
+<script language="JavaScript">
+function Hello() {
+ alert("Привет, " + document.f1.t1.value+"!");
+}
+
+</script>
+</html>

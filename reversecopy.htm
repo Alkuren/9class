@@ -1,0 +1,44 @@
+﻿<html>
+<head> 
+<meta charset="utf-8">
+<title>Поработаем с Java-Script</title>
+</head>
+<body>
+<form name="f1">
+ <input type="text" size="30" name="t1" value="Чувак" onclick=init()>
+ <input type="text" size="30" name="t2"><br>
+ <input type="button" value="Жми!" onclick="copytext()">
+</form>
+
+</body>
+<script language="JavaScript">
+function copytext() {
+var s, s_no_spaces=""
+var out="",out_no_spaces=""
+s=document.f1.t1.value
+//alert(s);
+//alert(s.length);
+
+for (i=0; i<s.length; i++)
+ {
+   //alert(i)
+   out=s[i]+out
+   if(s[i]!=" ") {
+   s_no_spaces+=s[i]
+   out_no_spaces=s[i]+out_no_spaces
+   }
+ }
+  //alert(s_no_spaces)
+  //alert(out_no_spaces)
+  document.f1.t2.value= out
+  if (s_no_spaces!="" && s_no_spaces.toLowerCase()==out_no_spaces.toLowerCase() ){
+  document.f1.t2.style.backgroundColor="lightgreen"
+  alert('"'+s+'"'+" - палиндром!")
+  }
+}
+function init(){
+ document.f1.t2.value=""
+ document.f1.t2.style.backgroundColor="white"
+}
+</script>
+</html>

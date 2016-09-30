@@ -1,0 +1,78 @@
+﻿<html>
+<head> 
+<!-- Тег meta для указания кодировки -->
+<meta charset="utf-8">
+<title>Правильное сложение дробей</title>
+</head>
+<body onload="reinit()">
+<center><h2>Правильное сложение дробей</h2></center>
+<form name="f1">
+<table>
+<tr>
+ <td><input type="text" size="5" name="ta" value="2" onfocus="reinit()"></td> 
+ <td><input type="text" size="5" name="tb" value="1" onfocus="reinit()"></td>
+ <td><input type="text" size="5" name="tc" ></td>
+</tr>
+<tr>
+ <td>--------</td> 
+ <td>+ -------</td>
+ <td>= -------</td>
+</tr>
+<tr>
+ <td><input type="text" size="5" name="td" value="4" onfocus="reinit()"></td> 
+ <td><input type="text" size="5" name="te" value="3" onfocus="reinit()"></td>
+ <td><input type="text" size="5" name="tf" ></td>
+</tr>
+</table> 
+<br>
+ <input type="button" value="+" onclick="fractions()">
+</form>
+
+</body>
+<script language="JavaScript">
+function fractions() {
+  var a,b,c,d,e,f,nodik,znak=1
+	a=Number(document.f1.ta.value);
+	b=Number(document.f1.tb.value);
+	
+	d=Number(document.f1.td.value);
+	e=Number(document.f1.te.value);
+	
+	c=a*e+b*d;
+	f=d*e;
+	if (c<0) { c=-c; znak=-1}
+	nodik=nod(c,f);
+	c=znak*c/nodik;
+	f=f/nodik;
+	
+  
+	document.f1.tc.value=c;
+	document.f1.tc.style.backgroundColor="lightgreen";
+	document.f1.tf.value=f;
+	document.f1.tf.style.backgroundColor="lightgreen";
+}
+function nod(one, two) {
+  
+  var res = "НОД "+one+" и "+ two +" = ";
+  while (one != two) {
+   if (one>two) {
+    one=one-two;
+   } else {
+   two=two-one;
+   }; 
+  };	
+  //alert (res+one);
+  return one;
+
+}
+function reinit() {
+	document.f1.tc.value="";
+	document.f1.tc.style.backgroundColor="white";
+	document.f1.tf.value="";
+	document.f1.tf.style.backgroundColor="white";
+
+
+}
+
+</script>
+</html>
